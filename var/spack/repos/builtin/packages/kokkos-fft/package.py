@@ -24,7 +24,7 @@ class KokkosFft(CMakePackage):
 
     depends_on("kokkos")
 
-    variant("host", "Enable host fft, i.e. fftw")
+    variant("host", default=False, description="Enable host fft, i.e. fftw")
 
     depends_on("cuda", when="^kokkos +cuda")
     depends_on("hipfft", when="^kokkos +rocm")
