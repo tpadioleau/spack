@@ -38,5 +38,6 @@ class KokkosFft(CMakePackage):
         args = [
             self.define("KokkosFFT_ENABLE_INTERNAL_KOKKOS", False),
             self.define_from_variant("KokkosFFT_ENABLE_HOST_AND_DEVICE", "host"),
+            self.define("KokkosFFT_ENABLE_TESTS", True),
         ]
         return args
