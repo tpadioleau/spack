@@ -25,6 +25,7 @@ class KokkosFft(CMakePackage):
     depends_on("kokkos")
 
     variant("host", default=False, description="Enable host fft, i.e. fftw")
+    variant("unit_test", default=True, description="Enable Unit Tests")
 
     depends_on("cuda", when="^kokkos +cuda")
     depends_on("hipfft", when="^kokkos +rocm")
@@ -34,10 +35,12 @@ class KokkosFft(CMakePackage):
 
     depends_on("intel-oneapi-mkl", when="^kokkos +sycl")
 
+    depends_on("googletest", when="+unit_test")
+
     def cmake_args(self):
         args = [
             self.define("KokkosFFT_ENABLE_INTERNAL_KOKKOS", False),
             self.define_from_variant("KokkosFFT_ENABLE_HOST_AND_DEVICE", "host"),
-            self.define("KokkosFFT_ENABLE_TESTS", True),
+            self.define("KokkosFFT_ENABLE_TESTS", "unit_test"),
         ]
         return args
