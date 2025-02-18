@@ -22,7 +22,7 @@ class KokkosFft(CMakePackage):
 
     depends_on("cxx", type="build")
 
-    depends_on("kokkos +complex_align")
+    depends_on("kokkos@4.4.00: +complex_align")
 
     variant("host", default=False, description="Enable host fft, i.e. fftw")
     variant("unit_test", default=False, description="Enable Unit Tests")
