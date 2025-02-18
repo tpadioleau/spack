@@ -12,7 +12,7 @@ class KokkosFft(CMakePackage):
     homepage = "https://github.com/kokkos/kokkos-fft"
     url = "https://github.com/kokkos/kokkos-fft/archive/refs/tags/v0.2.1.tar.gz"
 
-    maintainers("cedricchevalier19")
+    maintainers("cedricchevalier19", "tpadioleau", "yasahi-hpc")
 
     license("Apache-2.0 WITH LLVM-exception OR MIT", checked_by="cedricchevalier19")
 
