@@ -28,12 +28,21 @@ class KokkosFft(CMakePackage):
     variant("unit_test", default=False, description="Enable Unit Tests")
 
     depends_on("cuda", when="^kokkos +cuda")
+
+    # FIXME: deal with rocfft
     depends_on("hipfft", when="^kokkos +rocm")
 
-    depends_on("fftw~mpi", when="^kokkos ~cuda ~rocm ~sycl")
-    depends_on("fftw~mpi", when="+host")
+    # FIXME: take the correct configuration for fftw:
+    #   - +openmp if ^kokkos+openmp ~gpu || +host ^kokkos+openmp
+    #   - ~openmp if ^kokkos+openmp ~gpu || +host ^kokkos+openmp
+    #   - "+threads": not available as a variant in spack
+    depends_on("fftw~mpi precision=float,double", when="^kokkos ~cuda ~rocm ~sycl")
+    depends_on("fftw +openmp", when="^kokkos +openmp")
+    depends_on("fftw~mpi precision=float,double", when="+host")
 
     depends_on("intel-oneapi-mkl", when="^kokkos +sycl")
+
+    # FIXME: how to handle other kokkos backends: hpx, openmp target, openacc
 
     depends_on("googletest", when="+unit_test")
 
