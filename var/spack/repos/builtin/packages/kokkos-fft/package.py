@@ -25,7 +25,7 @@ class KokkosFft(CMakePackage):
     depends_on("kokkos +complex_align")
 
     variant("host", default=False, description="Enable host fft, i.e. fftw")
-    variant("unit_test", default=True, description="Enable Unit Tests")
+    variant("unit_test", default=False, description="Enable Unit Tests")
 
     depends_on("cuda", when="^kokkos +cuda")
     depends_on("hipfft", when="^kokkos +rocm")
@@ -42,5 +42,8 @@ class KokkosFft(CMakePackage):
             self.define("KokkosFFT_ENABLE_INTERNAL_KOKKOS", False),
             self.define_from_variant("KokkosFFT_ENABLE_HOST_AND_DEVICE", "host"),
             self.define("KokkosFFT_ENABLE_TESTS", "unit_test"),
+            self.define("KokkosFFT_ENABLE_DOCS", False),
+            self.define("KokkosFFT_ENABLE_BENCHMARK", False),
+            self.define("KokkosFFT_ENABLE_EXAMPLES", False),
         ]
         return args
