@@ -45,5 +45,7 @@ class KokkosFft(CMakePackage):
             self.define("KokkosFFT_ENABLE_DOCS", False),
             self.define("KokkosFFT_ENABLE_BENCHMARK", False),
             self.define("KokkosFFT_ENABLE_EXAMPLES", False),
+            self.define("CMAKE_CXX_COMPILER", self["kokkos"].kokkos_cxx),
         ]
+
         return args
